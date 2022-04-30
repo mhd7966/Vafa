@@ -5,7 +5,7 @@ definitions:
       page:
         default: 1
         type: integer
-      page_size:
+      pageSize:
         default: 10
         type: integer
       status:
@@ -21,6 +21,20 @@ definitions:
       status:
         type: string
     type: object
+  models.User:
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      national_id:
+        type: string
+      status:
+        default: 1
+        type: integer
+    required:
+    - national_id
+    type: object
 info:
   contact:
     email: fiber@swagger.io
@@ -33,6 +47,31 @@ info:
   title: Vafa API
   version: "1.0"
 paths:
+  /users:
+    post:
+      description: create user
+      operationId: new_user
+      parameters:
+      - description: user
+        in: body
+        name: userBody
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: new user
+      tags:
+      - user
   /users/:
     get:
       description: return users
@@ -44,7 +83,7 @@ paths:
         type: integer
       - default: 10
         in: query
-        name: page_size
+        name: pageSize
         type: integer
       - default: 1
         in: query

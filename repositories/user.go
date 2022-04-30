@@ -1,7 +1,6 @@
 package repositories
 
 import (
-
 	"github.com/mhd7966/Vafa/connections"
 	"github.com/mhd7966/Vafa/inputs"
 	"github.com/mhd7966/Vafa/models"
@@ -25,4 +24,12 @@ func GetUsers(query *inputs.GetUsersQuery) (*[]models.User, error) {
 	}
 
 	return &users, nil
+}
+
+func CreateUser(user *models.User) error {
+
+	if result := connections.DB.Create(&user); result.Error != nil {
+		return result.Error
+	}
+	return nil
 }

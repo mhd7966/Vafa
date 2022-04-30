@@ -12,7 +12,7 @@ func UserRouter(app fiber.Router) {
 
 	api.Get("/", controllers.GetUsers)
 	// api.Get("/:id", controllers.GetUser)
-	// api.Post("/", controllers.NewUser)
+	api.Post("", controllers.NewUser)
 	// api.Post("/:id", controllers.CancelUser)
 	// api.Put("/:id", controllers.UpdateUser)
 	// api.Delete("/:id", controllers.DeleteUser)

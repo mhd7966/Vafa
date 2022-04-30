@@ -32,6 +32,46 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/users": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "create user",
+                "tags": [
+                    "user"
+                ],
+                "summary": "new user",
+                "operationId": "new_user",
+                "parameters": [
+                    {
+                        "description": "user",
+                        "name": "userBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        },
         "/users/": {
             "get": {
                 "description": "return users",
@@ -50,7 +90,7 @@ var doc = `{
                     {
                         "type": "integer",
                         "default": 10,
-                        "name": "page_size",
+                        "name": "pageSize",
                         "in": "query"
                     },
                     {
@@ -85,7 +125,7 @@ var doc = `{
                     "type": "integer",
                     "default": 1
                 },
-                "page_size": {
+                "pageSize": {
                     "type": "integer",
                     "default": 10
                 },
@@ -106,6 +146,27 @@ var doc = `{
                 },
                 "status": {
                     "type": "string"
+                }
+            }
+        },
+        "models.User": {
+            "type": "object",
+            "required": [
+                "national_id"
+            ],
+            "properties": {
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "national_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer",
+                    "default": 1
                 }
             }
         }
