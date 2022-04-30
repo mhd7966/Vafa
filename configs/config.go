@@ -13,7 +13,7 @@ type Config struct {
 	Postgres struct {
 		Port string `env:"PG_PORT" env-default:"5432"`
 		Host string `env:"PG_HOST" env-default:"postgres"`
-		Name string `env:"PG_NAME" env-default:"hodhod"`
+		Name string `env:"PG_NAME" env-default:"vafa"`
 		User string `env:"PG_USER" env-default:"admin"`
 		Pass string `env:"PG_PASS" env-default:"postgres_password"`
 	}

@@ -8,14 +8,14 @@ import (
 
 func UserRouter(app fiber.Router) {
 
-	api := app.Group("/user")
+	api := app.Group("/users")
 
 	api.Get("/", controllers.GetUsers)
-	api.Get("/:id", controllers.GetUser)
-	api.Post("/", controllers.NewUser)
-	api.Post("/:id", controllers.CancelUser)
-	api.Put("/:id", controllers.UpdateUser)
-	api.Delete("/:id", controllers.DeleteUser)
+	// api.Get("/:id", controllers.GetUser)
+	// api.Post("/", controllers.NewUser)
+	// api.Post("/:id", controllers.CancelUser)
+	// api.Put("/:id", controllers.UpdateUser)
+	// api.Delete("/:id", controllers.DeleteUser)
 
 	log.Log.Info("User routes created :)")
 

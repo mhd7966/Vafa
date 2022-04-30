@@ -7,13 +7,9 @@ import (
 )
 
 func MainRouter(app fiber.Router) {
-	api := app.Group("/v0", gopkgs.Auth)
+	api := app.Group("/v0")
 
-	LogRouter(api)
-	HooRouter(api)
-	AlertRouter(api)
 	UserRouter(api)
-	AlertGroupRouter(api)
 
 	log.Log.Info("All routes created successfully :)")
 

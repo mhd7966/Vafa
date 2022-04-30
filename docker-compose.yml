@@ -11,7 +11,7 @@ services:
       - TZ=Asia/Tehran
       - PG_HOST=postgres
       - PG_PORT=5432
-      - PG_NAME=hodhod
+      - PG_NAME=vafa
       - PG_USER=admin
       - PG_PASS=admin
       - LOG_LEVEL=debug
@@ -30,6 +30,6 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=hodhhod
+      - POSTGRES_DB=vafa
     volumes:
-      - ~/dockerv/postgres:/var/lib/postgresql/data
+      - ~/dockerv/postgres/:/var/lib/postgresql/data

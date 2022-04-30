@@ -8,8 +8,6 @@ ENV CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64
 
-ARG BUILD_PATH=.
-
 COPY . .
 
 RUN go build -ldflags="-w -s" -o go-app .
@@ -17,7 +15,5 @@ RUN go build -ldflags="-w -s" -o go-app .
 FROM alpine:3.14.0
 
 COPY --from=builder /app/go-app /app/go-app
-# COPY --from=builder /go/bin/sql-migrate /usr/local/bin/sql-migrate
-COPY ./pkg/migrations/ /pkg/migrations/
-COPY dbconfig.yml .
+
 CMD ["/app/go-app"]
