@@ -1,0 +1,38 @@
+name: Hodhod CI/CD
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: Builder01
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v1
+      #   with:
+      #     registry: hub.abr.ooo
+      #     username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      #     password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Build Hodhod API Image
+        run: docker build -t hub.abr.ooo/abrooo/hodhod:latest .
+
+      - name: Push Hodhod API Image
+        run: docker push hub.abr.ooo/abrooo/hodhod:latest
+
+      - name: Build Hodhod Worker Image
+        run: docker build --build-arg BUILD_PATH=./cmd/worker -t hub.abr.ooo/abrooo/hodhod:worker-latest .
+
+      - name: Push Hodhod Worker Image
+        run: docker push hub.abr.ooo/abrooo/hodhod:worker-latest
+
+  deploy:
+    needs: build
+    runs-on: deployer01
+    steps:
+      - name: Deploy
+        run: docker pull hub.abr.ooo/abrooo/hodhod:latest && cd /srv/hodhod && docker-compose up -d
