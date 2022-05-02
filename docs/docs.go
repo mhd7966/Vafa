@@ -258,9 +258,6 @@ var doc = `{
         },
         "models.User": {
             "type": "object",
-            "required": [
-                "national_id"
-            ],
             "properties": {
                 "first_name": {
                     "type": "string"

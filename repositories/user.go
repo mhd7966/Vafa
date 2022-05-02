@@ -43,7 +43,7 @@ func GetUsers(query inputs.GetUsersQuery) (*[]models.User, error) {
 
 	offset := (query.Page - 1) * query.Size
 
-	if result := connections.DB.Where("status = ?", query.Status).Offset(offset).Limit(query.Size).Find(&users); result.RowsAffected < 1 {
+	if result := connections.DB.Where("status = ?", query.Status).Order("created_at DESC").Offset(offset).Limit(query.Size).Find(&users); result.RowsAffected < 1 {
 		return nil, result.Error
 	}
 
