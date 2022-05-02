@@ -38,7 +38,7 @@ func GetUser(c *fiber.Ctx) error {
 		log.Log.WithFields(logrus.Fields{
 			"user_id":  userID,
 			"response": response.Message,
-		}).Error("DeleteUser. User doesn't exist!")
+		}).Error("GetUser. User doesn't exist!")
 		return c.Status(fiber.StatusBadRequest).JSON(response)
 	}
 
@@ -137,10 +137,16 @@ func NewUser(c *fiber.Ctx) error {
 
 	validate := validator.New()
 	if err := validate.Struct(userBody); err != nil {
-		response.Message = "Validate NationalID Failed"
+		validateError := "error : "
+		for _, err := range err.(validator.ValidationErrors) {
+			validateError += err.StructField() + ", "
+		}
+		response.Message = "Validate User Info Failed"
+		response.Data = validateError
 		log.Log.WithFields(logrus.Fields{
-			"response": response.Message,
-			"error":    err.Error(),
+			"response":       response.Message,
+			"validate_error": validateError,
+			"error":          err.Error(),
 		}).Error("NewUser. Validate user info failed!")
 		return c.Status(fiber.StatusBadRequest).JSON(response)
 	}

@@ -1,19 +1,26 @@
 # Vafa
 
 For running migration, run this command ):
-```
-go get -v github.com/rubenv/sql-migrate/...
-```
-then:
-```
-sql-migrate up
+
+ Download swag by using:
+```sh
+$ go get -u github.com/swaggo/swag/cmd/swag
 ```
  Swagger init changes, run in main project directory : 
 ```
-  swag init -g main.go
+$ swag init
 ```
 
   To run program : 
 ```
-    docker-compose up
+$ docker-compose up
 ```
+ Download sql-migrate by using:
+```
+$ go get -v github.com/rubenv/sql-migrate/...
+```
+For running migration, run this command (Note: The database must be up)
+```
+$ sql-migrate up
+```
+

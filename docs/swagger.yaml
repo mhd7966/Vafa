@@ -32,8 +32,6 @@ definitions:
       status:
         default: 1
         type: integer
-    required:
-    - national_id
     type: object
 info:
   contact:
